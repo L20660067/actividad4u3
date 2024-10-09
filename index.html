@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galería de Imágenes con Modal</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            min-height: 100vh;
+            margin: 0;
+            color: #fff;
+            position: relative;
+            z-index: 1;
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            max-width: 800px;
+            margin: 20px;
+            z-index: 2; 
+        }
+
+        .gallery img {
+            width: 100%;
+            height: auto;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: transform 0.3s;
+        }
+
+        .gallery img:hover {
+            transform: scale(1.05);
+        }
+
+        h1 {
+            z-index: 2; 
+        }
+
+       
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 3; 
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            position: relative;
+            max-width: 80%;
+            max-height: 80%;
+        }
+
+        .modal-content img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+
+       
+        .close {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            font-size: 30px;
+            color: white;
+            cursor: pointer;
+        }
+
+       
+        .video-background {
+            position: fixed;
+            right: 0;
+            bottom: 0;
+            min-width: 100%;
+            min-height: 100%;
+            z-index: -1;
+            object-fit: cover;
+        }
+
+    </style>
+</head>
+<body>
+
+    <video autoplay muted loop class="video-background">
+        <source src="Fondo para vídeo HD 2018.mp4" type="video/mp4">
+        Tu navegador no soporta la reproducción de video.
+    </video>
+
+    <h1>Galería de Imágenes</h1>
+
+    <div class="gallery">
+        <img src="images.jpeg" alt="Imagen 1" onclick="openModal(this)">
+        <img src="Tvc-chun-li2.webp" alt="Imagen 2" onclick="openModal(this)">
+        <img src="halo.jpeg" alt="Imagen 3" onclick="openModal(this)">
+        <img src="Yinlin.jpeg" alt="Imagen 4" onclick="openModal(this)">
+        <img src="ADEXMAAAJUA7IAIAAAAAATIB6QA7777774AAAAAASAAVQAQA.jpg" alt="Imagen 5" onclick="openModal(this)">
+        <img src="Classic_Marcus_GOW_3.webp" alt="Imagen 6" onclick="openModal(this)">
+    </div>
+
+    
+    <div id="imageModal" class="modal">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <div class="modal-content">
+            <img id="modalImage" src="">
+        </div>
+    </div>
+
+    <script>
+        
+        function openModal(element) {
+            document.getElementById("imageModal").style.display = "flex";
+            document.getElementById("modalImage").src = element.src;
+        }
+
+        
+        function closeModal() {
+            document.getElementById("imageModal").style.display = "none";
+        }
+
+        
+        window.onclick = function(event) {
+            const modal = document.getElementById("imageModal");
+            if (event.target === modal) {
+                closeModal();
+            }
+        }
+    </script>
+
+</body>
+</html>
+
